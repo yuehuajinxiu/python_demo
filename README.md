@@ -126,3 +126,50 @@ for循环后面还可以加上if判断,
 通过列表生成式，我们可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。
 
 如果列表元素可以按照某种算法推算出来，那我们是否可以在循环的过程中不断推算出后续的元素呢？这样就不必创建完整的list，从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器：generator。
+
+只要把一个列表生成式的`[]`改成`()`，就创建了一个generator：
+
+```python
+>>> L = [x * x for x in range(10)]
+>>> L
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+>>> g = (x * x for x in range(10))
+>>> g
+<generator object <genexpr> at 0x0000026F3AAACF20>
+>>>
+>>> for n in g:
+...     print(n)
+...
+0
+1
+4
+9
+16
+25
+36
+49
+64
+81
+```
+
+
+
+在每次调用`next()`的时候执行，遇到`yield`语句返回，再次执行时从上次返回的`yield`语句处继续执行。
+
+##### 迭代器
+
+可以被`next()`函数调用并不断返回下一个值的对象称为迭代器：`Iterator`。
+
+生成器都是`Iterator`对象，但`list`、`dict`、`str`虽然是`Iterable`，却不是`Iterator`。
+
+把`list`、`dict`、`str`等`Iterable`变成`Iterator`可以使用`iter()`函数：
+
+```python
+>>> isinstance(iter([]), Iterator)
+True
+>>> isinstance(iter('abc'), Iterator)
+True
+```
+
+### 函数式编程
+
