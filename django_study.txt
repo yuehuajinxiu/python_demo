@@ -1,0 +1,251 @@
+﻿推荐软件：
+beyondcompare  (比较代码差异)
+
+python怎么安装requests
+https://jingyan.baidu.com/article/86f4a73ea7766e37d7526979.html
+requests的使用
+最原始的
+打开idle 用idle打开tests/tc001.py run 就可以获得结果
+
+家里电脑python36 位置
+
+C:\Users\Administrator\AppData\Local\Programs\Python
+公司电脑：
+C:\Program Files\Python36\
+
+参考：
+https://www.runoob.com/django/django-install.html
+http://www.python3.vip/
+https://blog.csdn.net/qq_41068712/article/details/89761692
+
+
+将django 包放在python目录下
+运行python setup.py install   安装django
+
+查看django是否安装成功
+python
+>>> import django
+>>> django.get_version()
+
+创建项目
+django-admin startproject HelloWorld
+
+运行创建的项目
+python manage.py runserver 0.0.0.0:8000
+
+连不上解决的办法
+1.setting.py 中加ip
+ALLOWED_HOSTS = []
+
+2.我的电脑端口是 http://127.0.0.1:8080/
+python manage.py runserver 127.0.0.1:8080
+
+
+创建数据库，执行如下命令
+
+python manage.py migrate
+
+安装sqlite
+
+创建超级用户（管理员）
+家里
+python manage.py createsuperuser
+name:maolp
+email:maolp@qq.com
+password:1a2b3c4d
+
+公司
+python manage.py createsuperuser
+name:maolpp
+email:maolpp@qq.com
+password:1a2b3c4d
+
+http://127.0.0.1:8080/admin/
+
+
+创建 application
+ python manage.py startapp common 
+创建新表
+在创建的文件夹中的/models.py  
+配置文件 settings.py 
+python manage.py makemigrations appname
+python manage.py migrate
+
+模板技术
+
+后端人员专注于后端处理
+只需要给前段人员根据api要求返回相应的数据就可以
+几乎不要负责页面展示的工作
+所以要更加专注于数学  数据 等处理
+
+数据增删改查操作
+注意：Django 的 url路由功能 不支持 根据 HTTP 请求的方法 和请求体里面的参数 进行路由。
+一种方式是：自己编写一个函数， 来 根据 http请求的类型 和请求体里面的参数 分发（或者说路由）给 不同的函数进行处理。
+
+django 服务前段静态资源只有开发模式  但是在真正开发和工作中 不用django来运行前段静态资源
+
+开发模式： setting.py  DEBUG = True
+
+f12
+network 中 XHR  可以查看api 
+点击 api请求  点击 response 就可以看到请求返回的数据
+
+请求的常见有3种方式
+1  x-www-form-urlencoded     格式：username=xxxx&password=1223456
+2 json
+3 xml
+
+JSON:
+https://blog.csdn.net/stone_tomcate/article/details/64148648
+1、基于纯文本，跨平台传递极其简单；
+2、Javascript原生支持，后台语言几乎全部支持；
+3、轻量级数据格式，占用字符数量极少，特别适合互联网传递；
+4、可读性较强
+5、容易编写和解析
+
+1、JSON只有两种数据类型描述符，大括号{}和方括号[]，其余英文冒号:是映射符，英文逗号,是分隔符，英文双引号""是定义符。
+2、大括号{}用来描述一组“不同类型的无序键值对集合”（每个键值对可以理解为OOP的属性描述），方括号[]用来描述一组“相同类型的有序数据集合”（可对应OOP的数组）。
+3、上述两种集合中若有多个子项，则通过英文逗号,进行分隔。
+4、键值对以英文冒号:进行分隔，并且建议键名都加上英文双引号""，以便于不同语言的解析。
+5、JSON内部常用数据类型无非就是字符串、数字、布尔、日期、null 这么几个，字符串必须用双引号引起来，其余的都不用，日期类型比较特殊，这里就不展开讲述了，只是建议如果客户端没有按日期排序功能需求的话，那么把日期时间直接作为字符串传递就好，可以省去很多麻烦。
+
+
+
+django 有现成的登录方法
+Django的文档
+
+接口测试工具
+postman
+或者使用 requests库构建 登录请求http消息
+
+
+登录的用户信息不要存在cookie中 不安全  可以拿着cookie 在任意地方使用 就不用登录密码了
+
+所以主流的两种方案是  session 和 token
+
+Set-Cookie: sessionid=6qu1cuk8cxvtf4w9rjxeppexh2izy0hh  
+set-cookie  就是浏览器将sessionid值存入到浏览器的cookie中
+在set-cookie成功后 可以查看到 所有请求都有 相同的cookie
+
+数据库中的 session-key   是类似ID的
+         session-data 是存的关于session的数据的  是字典转义后的内容 不止一个数据可能是关于这个用户的很多对数据 比如id: name: password: level: 等等
+
+一般要在动态请求前 先判断是否是合法用户 （其他请求是否要判断是要根据用户需求的）
+eg:在合法用户下才能将数据库中的所有信息列出来
+
+chrome浏览器fitler中的XHR作用是什么？
+是记录ajax中的请求
+是一种用于创建快速来动态网页的技术
+也就是动态获取数据的请求
+
+
+数据表之间的关联关系：
+ 1对多 1对1  多对多
+ 
+1对多：
+外键  一个表的外键只能是他所关联表的主键，外键写在多的里面
+类似：一个客户表 一个订单表
+一个客户可以有多个订单 （1对多）
+
+
+多对多：
+through='OrderMedicine' 设置这个参数是因为 表“OrderMedicine” 还需要额外的字段
+如果不需要额外的字段  就没有必要设置这个参数了  系统会自动生成表
+
+
+
+数据增删改查操作
+查询所有    all()
+添加  实例化一个类  将每个属性赋值  save()
+查询某一条  get(pk=2) (pk 是 primary key)
+修改数据 将对象中的属性另赋值   save()
+删除数据   模型对象.delete() (物理删除，数据库中表中的数据被删除)
+         
+
+关联对象 
+stu = Students()
+stu.sname = '小明'
+stu.sid ='01'
+``
+stu.ggrade = grade1  (1对多的关联)
+stu.save()
+
+需求：获取关联对象的集合  eg:获取某个班级的所有学生
+grade1.students_set.all()
+1的对象（对象名）.多的表名(关联类名小写)_set.all()
+
+需求： 创建某个班级的一个学生的另一种方法
+stu3 = grade1.students_set.create(sname='曾志伟',sid ='02'```)
+注意：直接添加到数据库中了
+
+
+admin 中管理创建的表的方法 
+可以将model.py 创建的类  
+在admin.py 相应的写一些东西 
+也可以直接在model.py 写
+
+admin 页面显示 中文
+setting.py 设置
+LANGUAGE_CODE = 'zh-Hans'
+
+TIME_ZONE = 'Asia/Shanghai'
+
+
+展示的页面不太好理解  
+可以自定义管理页面
+
+class  MedicineAdmin(admin.ModelAdmin):
+	#列表页属性
+	#list_display = []
+	list_display  显示字段
+	list_filter = []
+	list_filter 过滤字段
+	search_fields = []
+	search_fields 搜索字段
+	list_per_page = 
+    list_per_page 分页
+	
+	
+	
+    #添加、修改页属性
+    #fields = []
+    #fieldsets = []
+
+
+
+python manage.py shell  -->进入到Python shell 中
+
+
+python-django 模型model字段类型说明
+https://www.cnblogs.com/wt869054461/p/4014271.html
+ajax
+https://blog.csdn.net/Ha_Girl/article/details/90710491
+requests 手册
+https://docs.djangoproject.com/zh-hans/2.1/ref/request-response/#django.http.HttpRequest
+关于HttpResponse的理解
+https://www.jianshu.com/p/7a0718e07068
+
+python+django搭建web项目
+https://blog.csdn.net/xm_csdn/article/details/74419683
+
+render_to_response()的作用
+https://blog.csdn.net/aman540/article/details/83904206
+
+python——Django项目开发：配置项目/static/路径，调用css、img、js等静态文件
+https://blog.csdn.net/qq_28484355/article/details/75308334
+
+报错类型
+IndentationError: unindent does not match any outer indentation level
+是因为缩进有问题  看着没有问题  但其实是有空格的问题  解决办法可以  右键+shift 矩形选中   tab 缩进4格
+不要在sqlitestudio 数据库中直接删表 会导致大错误
+
+
+
+
+
+
+
+
+
+
+

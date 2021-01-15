@@ -1,0 +1,1629 @@
+
+--------0-------------
+python
+优点： 相同目的  代码量少
+跨平台
+YouTube  豆瓣 等用Python
+web   云计算 都可以用Python
+
+本次课程安排：
+0： Python3的所有常用语法
+1： 面向对象编程思维
+2： 运用模块进行编程
+3： 游戏编程
+4： 计算机仿真
+
+
+--------------1-------------------
+python 下载版本 3.3.2
+http://www.python.org
+IDLE启动Python 
+IDLE是一个Python shell, shell 的意思就是“外壳”，基本上来说，就是一个通过键入文本与程序交互的途径。
+
+我们看到“>>>”这个提示符，他的含义是告诉你，Python已经准备好了，在等着你键入Python指令呢。
+
+好了，大家试试在IDLE里输入
+>>> print("I love fish")
+
+alt+n 上一条
+alt+p 下一条
+
+python 不用加“;”
+       注释用 # 
+	   多行注释用'''三个单引号或者"""三个双引号
+>>> print(5+3)
+>>>5+3
+
+python 安装方法：
+https://baijiahao.baidu.com/s?id=1606573927720991570&wfr=spider&for=pc
+0x80072efd - 未指定的错误 的解决方法：
+https://blog.csdn.net/j1124299616/article/details/86292345?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
+
+
+报错：
+inconsistent use of tabs and spaces in indentation
+这个报错就是混用了tab和4个空格造成的，检查代码，要不全部用tab，要不全部用4个空格，或者用idle编辑器校正
+--------------2------------------------
+用Python设计第一个游戏
+编写过程中 写部分按tab 弹出可能的单词
+f5 是跑程序
+python 是用缩进而不用大括号的
+
+BIF==built-in function  是Python内置函数的意思
+
+>>>dir(__builtins__) 可以打印出来Python的BIF
+>>>help(input)  可以在系统内查看input这个BIF的功能  （和Linux一样）
+
+本课程中的BIF：input   int  print 
+
+
+-----------------3--------------------
+变量名就像我们现实社会的名字，把一个值赋值给一个名字时，它会存储在内存中，称之为变量，在大多数语言中，都把这种行为称为“给变量赋值”或“把值存储在变量中”
+不过在Python与大多数其他计算机语言的做法稍有不同，它并不是把值存储在变量中，而更像是把名字贴在值的上边。
+所以有些Python程序员会说“Python”没有“变量”，只有“名字”。
+
+需要注意的地方
+在使用变量之前，需要对其先赋值
+变量名可以包含字母、数字、下划线、但变量名不能以数字开头。
+字母可以是大写或小写，但是大小写是不同的。eg fish  FISH是完全不同的名字
+等号（=）是赋值的意思，左边是名字，右边是值，不可写反了。
+变量的命名理论可以取任何合法的名字，但作为一个优秀的程序员，请将尽量给变量取一个专业一点的名字  
+
+字符串
+要告诉Python你在创建一个字符串，就要在字符两边加上引号，可以是单引号或者双引号。
+如果在字符串中需要出现单引号或双引号怎么办？
+有两种方法，第一种比较常用，就是使用我们的转义符号（\）对字符串中的引号进行转义：
+>>> ‘Let\'s go!’
+第二种就是拼接
+
+原始字符串
+>>> str='C:\now'
+程序会认为 \n 是换行 
+处理方法可以用\ 将\转义
+>>> str='C:\\now'
+但如果对于一个字符串中有很多个反斜杠就比较麻烦可以使用原始字符串
+原始字符串的使用非常简单，只需要在字符串前边加一个英文字母“r”即可：
+>>> str=r'C:\now'
+注意原始字符串的结尾不能以'\'结尾
+>>> str=r'C:\now\'会报错
+
+长字符串
+如果希望得到一个跨越多行的字符串，例如
+离离原上草，
+一岁一枯荣，
+野火烧不尽，
+春风吹又生。
+这我们就需要使用到三重引号字符串。单引号双引号无所谓要成对。
+>>> str="""
+离离原上草，
+一岁一枯荣，
+野火烧不尽，
+春风吹又生。
+"""
+或
+>>> str='''
+离离原上草，
+一岁一枯荣，
+野火烧不尽，
+春风吹又生。
+'''
+
+-------------------------4------------------------------
+条件分支
+Python的比较操作符
+> 
+>=  
+<
+<=
+==
+!=
+
+python的条件分支语法：
+if 条件：
+    条件为真（TRUE）执行的操作
+else：
+    条件为假（FALSE）执行的操作
+注意点：
+1 “：”
+2 缩进
+
+while 循环
+Python的while循环语法：
+while 条件：
+   条件为真执行的操作
+
+逻辑运算符
+and
+
+引入外援
+random模块
+random模块中有一个函数叫做：
+randint(),他会返回一个随机的整数
+
+导入模块：import random 
+使用模块中的函数： random.randint(0,10)
+
+shift+tab 整体缩进
+----------------------5-----------------------
+
+字符串拼接使用 +
+python的数据类型
+整型：可以进行大数运算
+浮点型：
+e记法：e是10  是表示10的多少次方
+布尔类型：true-->1  false-->0
+
+类型转换
+int()
+str()
+float()
+
+获取关于类型的信息
+type()
+isinstance()
+eg:
+a='小甲鱼'
+isinstance(a,str)
+>>>True
+3e5
+>>>300000.0
+
+---------------------6----------------------
+算术操作符
++ - * / % ** //
++=
+-=
+*=
+/=
+10//8=1
+3.0//2=1.0
+% 取余数
+** 幂运算
+3 ** 3=27
+
+eg:
+>>> a=10/8
+>>> a
+1.25
+>>> a=10//8
+>>> a
+1
+>>> a=2*3
+>>> a
+6
+>>> a=2**3
+>>> a
+8
+>>> a=10%8
+>>> a
+2
+优先级问题
+先乘除后加减遇到括号先括号
+先比较操作符 后 逻辑运算符
+幂运算的 比其左侧一元操作符高 比其右侧一元操作符低
+一元操作符 也叫单目操作符  是指一个符号操作一个数字 eg 负号
+两元操作符 也叫双目操作符  是指一个符号操作两个数字 eg 加减
+eg：-3 ** 2=-9
+高
+|   幂运算
+|   正负号 
+|   算术操作符
+|   比较操作符
+|   逻辑运算符
+低
+
+逻辑操作符
+and 
+or
+not 一元操作
+eg： not True = False
+优先级：
+高
+|  not
+|  and
+|  or
+低
+
+
+
+--------------------------7-----------------------------------------
+打飞机框架
+加载背景音乐
+播放背景音乐（设置单曲循环）
+我方飞机诞生
+interval =0;
+while True
+    if  用户点击了关闭按钮：
+        退出程序'=
+		
+	interval +=1
+	if interval == 50
+     	interval =0;
+        小飞机诞生
+		
+    小飞机移动一个位置
+    屏幕刷新
+    
+    if 用户鼠标产生移动：
+        我方飞机中心位置 = 用户鼠标位置
+        屏幕刷新
+    
+    if 我方飞机与小飞机发生肢体冲突：
+        我方挂，播放撞击音乐
+        修改我方飞机图案
+        打印“Game over”
+        停止背景音乐，最好淡出。
+
+
+
+
+
+----------------------------8----------------------------------
+
+分支和循环
+题目：
+按照100分制，90分以上成绩为A，80--90为B，60--80为C，60以下为D，写一个程序，当用户输入分数，自动转换为ABCD的形式打印。
+if  
+elif
+else
+
+python可以效避免“悬挂else”
+什么叫“悬挂else”？
+就是else写法因为不规范 导致匹配错误
+Python因为强制缩进就不会出现这种问题
+
+条件表达式（三元操作符）
+语法：x if 条件 else y
+有了这个三元操作符的条件表达式，你可以使用一条语句来完成以下的条件判断和赋值操作：
+x,y =4,5
+if x<y:
+   small =x
+else:
+   small =y
+例子可以改进为：
+small = x if x<y else y
+
+断言（assert）
+assert  这个关键字我们称之为“断言”，当这个关键字后边的条件为假的时候，程序自动崩溃并抛出AssertionError的异常。
+eg:
+>>> assert 3>4
+一般来说我们可以用它在程序中置入检查点，当需要确保程序中的某个条件一定为真才能让程序正常工作的话，assert关键字就非常有用了。
+
+
+
+-----------------------------------------9-------------------------------------
+while 循环
+
+while 条件：
+    循环体
+
+for 循环
+Python的for循环显得更为智能和强大
+for 目标 in 表达式：
+    循环体
+eg：
+favourite = "fishc"
+for i in favourite:
+    print(i,end=' ')
+	
+range()
+range([start,]stop[,step=1])
+-这个BIF有三个参数，其中用中括号括起来的两个表示这两个参数是可选的。
+-step=1 表示第三个参数的值默认值是1
+range这个BIF的作用是生成一个从start参数的值开始到stop参数的值结束的数字序列。
+eg：
+>>> list(range(5))
+=[0,1,2,3,4]
+>>> for i in range(1,10,2)
+        print(i)
+		
+break  & continue
+break:跳出循环体
+continue:终止本轮循环
+
+
+----------------------------------------10-----------------------------------
+列表：一个打了激素的数组
+列表：可以把不同数据类型放入一个列表（Python）
+数组：只能存放一种类型（其他）
+向列表添加元素
+append()//加一个
+extend()//把一个列表加进去
+insert()//添加到指定位置
+list() //list（）->新建空列表
+list(iterable)//将iterable转化为列表
+tuple() //新建空元组
+tuple(iterable) //将iterable转化为元组
+eg:
+member=['a','b','c']
+member.append('d')  
+memberq	
+>>>['a','b','c','d']
+member.extend(['e','f'])
+member
+>>>['a','b','c','d','e','f']
+member.insert(0,aa)
+member
+>>>['aa','a','b','c','d','e','f']
+
+>>> mem=['a',123,'b',1.2,True]
+>>> for i in mem:
+	print(type(i))
+<class 'str'>
+<class 'int'>
+<class 'str'>
+<class 'float'>
+<class 'bool'>
+
+>>> a= list('favorit')
+>>> a
+['f', 'a', 'v', 'o', 'r', 'i', 't']
+>>> type(a)
+<class 'list'>
+>>> b=tuple('favorit')
+>>> b
+('f', 'a', 'v', 'o', 'r', 'i', 't')
+>>> type(b)
+<class 'tuple'>
+
+#生成一个空列表
+>>> c=list()
+>>> c
+[]
+>>> type(c)
+<class 'list'>
+#生成一个空元组
+>>> d=tuple()
+>>> d
+()
+>>> type(d)
+<class 'tuple'>
+
+>>> a
+['f', 'a', 'v', 'o', 'r', 'i', 't', 'aaa']
+>>> a= a.append('aaa')
+>>> a
+>>> 
+原因是因为a是寄存器  这样不行
+>>> b=5
+>>> b=b+4
+>>> b
+9
+原因是因为b是变量  这样可以 
+>>> a=['f', 'a', 'v', 'o', 'r', 'i', 't']
+>>> b=a.append('aaaa')
+>>> b
+>>> type(b)
+<class 'NoneType'>
+>>> a=['f', 'a', 'v', 'o', 'r', 'i', 't']
+>>> a.append('aaaa')
+>>> a
+['f', 'a', 'v', 'o', 'r', 'i', 't', 'aaaa']
+具体可以等杨鹏的笔记看一下
+
+
+python 中列表操作
+https://www.runoob.com/python/python-lists.html
+https://www.cnblogs.com/Yanjy-OnlyOne/p/9808130.html
+
+
+----------------------------------------11-----------------------------------
+从列表中获取元素
+跟数组一样，我们可以通过元素的索引值（index）从列表获取单个元素，注意，列表索引值是从0开始的；
+eg：
+>>> member[1]
+'a'
+
+从列表删除元素
+remove()
+del  //不是函数 也不是方法 是一个语句
+pop() //无参数：将列表中最后一个值弹出并给用户  有参数：将列表中指定索引值弹出并给用户
+eg：
+member.remove('aa');
+member
+>>>['a','b','c','d','e','f']
+del member[1]
+member
+>>>['a','c','d','e','f']
+del member  //删除整个列表
+member.pop()
+>>> 'f'
+member
+>>>['a','c','d','e']
+member.pop(1)
+>>>'c'
+member
+>>>['a','d','e']
+
+列表分片（slice）
+利用索引值，每次我们可以从列表获取一个元素，但是我们总是贪心的，如果一次性需要获取多个元素，有没有办法实现呢？
+利用列表分片，我们可以简单的实现这个要求。
+eg:
+member[0:2]
+>>>['a','d']
+member
+>>>['a','d','e']
+
+Python 表达式   	        结果	                    描述
+len([1, 2, 3])	             3	                        长度
+[1, 2, 3] + [4, 5, 6]	[1, 2, 3, 4, 5, 6]  	        组合
+['Hi!'] * 4         	['Hi!', 'Hi!', 'Hi!', 'Hi!']	重复
+3 in [1, 2, 3]	            True	元素是否存在于列表中
+for x in [1, 2, 3]: print x,	1 2 3	迭代
+
+
+----------------------------------------12----------------------------------
+列表的一些常用操作符
+比较操作符  //默认第0个比较  字符串是比较ASCII码的
+逻辑操作符  
+连接操作符   + //+左右两边的类型要一致
+重复操作符   *  *=
+成员关系操作符   in  not in
+eg：
+list1=[123,234]
+list2=[345,456]
+list3=[12,34]
+list4=list1+list2
+list4
+>>>[123,234,345,456]
+list3*3
+>>>[12,34,12,34,12,34]
+123 in list1
+>>>True
+123 not in list1
+>>>False
+
+列表类型的内置函数
+>>> dir(list) 查看列表内置函数
+list3.count(12)
+>>>3
+list3.index(12)
+>>>0 
+list3.index(12,1,3)
+>>>2
+list4.reverse()
+list4
+>>>[456,345,234,123]
+list4.sort()  //排序  默认从小到大
+list4
+>>>[123,234,345,456]
+list4.sort(reverse=True)  //排序 从大到小
+list4
+>>>[456,345,234,123]
+list5=list4[:]  把list4的值copy了一份给list5  list4做改变 list5不变
+list6=list4  把list4的值赋给list6  list4做改变 list6同样改变
+
+
+--------------------------------13--------------------------------
+元组：戴上了枷锁的列表
+元组是不可改变的类型,元组内容不能修改
+由于和列表是近亲关系，所以元组和列表在实际使用上是非常相似的。
+我们这节课主要通过讨论元组和列表到底有什么不同来学习元组。
+通过一下几点来讨论学习：
+-创建和访问一个元组
+eg：
+yuanzu =(1,2,3,4,5,6,7,8)
+liebiao =[1,2,3,4,5,6,7,8]
+yuanzu[1]
+>>>2
+yuanzu[5:]
+>>>(6,7,8)
+yuanzu1=yuanzu[:]
+yuanzu = (1)   //int
+yuanzu =(1,)  //tuple
+yuanzu =1,  //tuple
+逗号分隔的一组数据  就是元组
+yuanzu = ()  //空元组的创建
+-更新和删除一个元组
+temp =('a','b','c','d')
+temp = temp[:2]+('e',)+temp[2:]
+temp 
+>>>('a','b','e','c','d')
+del temp  //删除整个元组
+
+
+--------------------------------14--------------------------------
+字符串
+和元组相同 不要轻易改变
+str1='i love fishc'
+str1[:6]
+>>>'i love'
+str1[5]
+>>>'e'
+str1[:6]+'插入的字符串'+str1[6:]  //str1还存在 还和之前一样的   python 机制会把没有标签的数据回收
+'i love插入的字符串 fishc'
+
+字符串方法
+capitalize()
+casefold()
+center(width)
+count(sub[,start,end])
+encode
+endwith
+expendtabs
+find
+index
+isalnum
+islower
+istitle
+isupper
+join(sub)
+lower()
+replace
+split
+...
+
+-------------------------15-------------------------
+字符串的格式化
+"{0} love {1}.{2}".format("i","fishc","com")   //位置参数
+>>> "i love fishc.com"
+"{a} love {b}.{c}".format(a="i",b="fishc",c="com") //关键字参数
+>>> "i love fishc.com"
+\t   //是指一个tab的距离
+"{{0}}".format('不打印')   //外面的{} 把{0}转义了
+>>>"{0}"
+'{0:1f}{1}'.format(27.654,'GB')   
+>>>'27.7GB'
+
+字符串格式化符号含义
+符号	说明
+%c	格式化字符及其ASCII码
+%s	格式化字符串
+%d	格式化整数
+%o(字母o)	格式化无符号八进制
+%x	格式化无符号十六进制
+%X	格式化无符号十六进制（大写）
+%f	格式化浮点数值，可指定小数点后的精度
+%e	使用科学计数法格式化浮点数
+%E	作用同%e，用科学计数法格式化浮点数
+%g	根据值得大小决定使用%f或者%e
+%G	作用同%g根据值的大小使用%f或者%E
+
+格式化操作符辅助符
+通过"%"可以进行字符串格式化，但是"%"经常会结合下面的辅助符一起使用。
+
+辅助符号      说明
+
+*     定义宽度或者小数点精度
+-     用做左对齐
++     在正数前面显示加号(+)
+#     在八进制数前面显示零(0)，在十六进制前面显示"0x"或者"0X"（取决于用的是"x"还是"X"）
+0     显示的数字前面填充"0"而不是默认的空格
+m.n   m 是显示的最小总宽度，n 是小数点后的位数（如果可用的话）
+
+字符串转义字符含义
+转义字符      意义
+\a        响铃(BEL)
+\b        退格(BS) ，将当前位置移到前一列
+\f        换页(FF)，将当前位置移到下页开头
+\n        换行(LF) ，将当前位置移到下一行开头
+\r        回车(CR) ，将当前位置移到本行开头
+\t        水平制表(HT) （跳到下一个TAB位置）
+\v        垂直制表(VT)
+\\        代表一个反斜线字符''\'
+\'        代表一个单引号（撇号）字符
+\"        代表一个双引号字符
+\?        	代表一个问号	
+\0        空字符(NUL)
+\ddd      1到3位八进制数所代表的任意字符
+\xhh      十六进制所代表的任意字符
+
+
+eg:
+'%c' % 97
+>>>'a'
+'%c %c %c' % (97,98,99)    //把(97,98,99) 按照ASCII码替代'%c %c %c'
+>>>'a b c'
+'%s' % 'i love fishc.com'  //把'i love fishc.com' 替代 '%s'
+>>>'i love fishc.com'
+'%5.1f' % 27.658
+>>>' 27.7'
+
+
+-------------------------16-------------------------
+序列
+列表、元组和字符串的共同点
+-都可以通过索引得到每一个元素
+-默认索引值总是从0开始
+-可以通过分片的方法得到一个范围内的元素的集合
+-有很多共同的操作符（重复操作符、拼接操作符、成员关系操作符）
+
+BIF
+list()
+tuple()
+str()
+len()
+max()
+min()
+sum()
+sorted()
+reversed()
+enumerate()
+zip()
+
+ 
+-------------------------17-------------------------
+函数：Python的乐高积木
+eg:
+//定义函数 无参数
+def MyFirstFunction():
+    print('这是我创建的第一函数')
+	print('我表示很激动')
+//调用函数
+MyFirstFunction()
+>>>'这是我创建的第一函数'
+>>>'我表示很激动'
+
+//定义函数 有参数
+def MysecondFunction(name):
+    print(name+'这是我创建的第一函数')
+//调用函数
+MysecondFunction('小甲鱼')
+>>>'小甲鱼这是我创建的第一函数'
+
+函数的返回值   return
+eg：
+def  add(num1,num2):
+    return (num1+num2)
+print(add(5,6))
+>>>11
+
+
+-------------------------18-------------------------
+形参和实参
+eg：
+//定义函数 有参数
+def MysecondFunction(name):  ---->形参
+    print(name+'这是我创建的第一函数')
+//调用函数
+MysecondFunction('小甲鱼')   ---->实参
+>>>'小甲鱼这是我创建的第一函数'
+
+函数文档：
+def MysecondFunction(name):  ---->形参
+    '这部分是函数文档，不会打印和对函数计算方法有影响'
+	#这是注释
+    print(name+'这是我创建的第一函数')
+MysecondFunction.__doc__     //调用函数文档
+>>>'这部分是函数文档，不会打印和对函数计算方法有影响'
+help(MysecondFunction) //用help 也可以查看函数信息
+>>>MysecondFunction(name)
+>>>    '这部分是函数文档，不会打印和对函数计算方法有影响'
+
+关键字参数
+eg：
+def Saysome(name,word)
+    print(name+'->'+word)
+Saysome('小甲鱼','科技让人类顺应自然')
+>>>'小甲鱼->科技让人类顺应自然'
+Saysome(word='科技让人类顺应自然',name='小甲鱼')  //防止参数顺序不同导致结果错误
+>>>'小甲鱼->科技让人类顺应自然'
+
+默认参数
+def Saysome(name="小甲鱼",word="科技让人类顺应自然")
+    print(name+'->'+word)
+Saysome()
+>>>'小甲鱼->科技让人类顺应自然'	
+Saysome('小金鱼')
+>>>'小金鱼->科技让人类顺应自然'	
+
+收集参数
+eg:
+def test(*params);
+    print('参数的长度是:',len(params))
+	print('第二个参数是:',params[1])
+test(1,'小甲鱼',3.14,6,7,8)
+'参数的长度是:6'
+'第二个参数是:小甲鱼'
+def test(*params,exp);
+    print('参数的长度是:',len(params))
+	print('第二个参数是:',params[1])
+	print(exp)
+test(1,'小甲鱼',3.14,6,7,8,exp='aaa')
+'参数的长度是:6'
+'第二个参数是:小甲鱼'
+'aaa'
+
+
+-------------------------19-------------------------
+函数与过程
+函数：有返回值 
+过程：是简单，特殊且没有返回值的
+Python 即使没有return  也会默认返回none
+Python动态确定类型，不像Java定义的很清楚是什么类型的
+Python可以返回多个值
+eg：
+def back();
+    return[1,'小甲鱼',3.14]
+back()
+>>>[1,'小甲鱼',3.14]
+
+函数变量的作用域
+局部变量
+全局变量
+在函数外面不能调用局部变量
+在函数内部可以调用全局变量
+如果在函数内部对全局变量进行重新赋值的话，重新赋值的为和全局变量同名的局部变量，在函数外部的全局变量没变，尽量不要这样做，会使代码产生混淆
+eg：
+count = 5
+def Myfuc():
+    count=10
+	print(count)  //10
+print(count)  //5
+
+
+
+-------------------------20-------------------------
+内嵌函数和闭包
+global关键字
+eg:
+count = 5
+def Myfuc():
+    global count
+    count=10
+	print(count)  //10
+print(count)  //10
+
+内嵌函数
+eg：
+def fun1():
+    print('a')
+	def fun2():
+	    print('b')
+	fun2()
+fun1
+>>> 'a'
+>>> 'b'
+//在全局无法调用内嵌的函数
+
+闭包
+eg：
+def fun1(x):
+    def fun2(y):
+	    return x*y
+	return fun2
+//调用方法
+i= fun1(8)   //i的类型是function
+i(5)
+>>>40
+fun1(8)(5) 
+>>>40
+
+def fun1():
+    x=5
+    def fun2():
+	    使用fun2外的 fun1内的变量  需要用nonlocal  相当于global
+		nonlocal x
+	    x*=x
+	    return x
+	return fun2()
+fun1()
+>>>25
+
+
+-------------------------21-------------------------
+lambda表达式
+eg：
+def ds(x):
+    return 2*x+1
+ds(5)
+>>>11
+lambda x : 2*x+1   //匿名函数   用完后 因为没有名字 所以系统会自动清除
+g=lambda x : 2*x+1
+g(5)
+>>>11
+lambda x,y: x+y
+f= lambda x,y: x+y
+f(2,3)
+>>>5
+
+lambda表达式的作用
+Python写一些执行脚本时，使用lambda 就可以省下定义函数的过程，比如我们只是需要写一个简单的脚本来管理服务器时间，我们就不需要专门定义一个函数然后再写调用，使用lambda就可以使得代码更加精简
+对于一些比较抽象并且整个过程执行下来只需要调用一两次的函数，有时候给函数起个名字也是比较头疼的问题，使用lambda就不需要考虑命名的问题了。
+简化代码的可读性，由于普通的屌丝函数阅读经常要跳到开头def定义部分，使用lambda函数可以省去这样的步骤。
+
+BIF
+filter()  
+map()
+
+
+-------------------------22-------------------------
+递归：函数调用自身,可以正确的返回条件（不能是死循环），递归有危险性，而且比较消耗时间和空间，代码不方便维护，能不用就不用
+树结构的定义
+eg：
+//递归
+def digui():
+    return digui()
+digui()
+//会报错
+//python3 出于保护 对递归的深度设置为100层 如果爬虫的话可能深度要加深 可以自己设置  	
+//设置递归深度
+//import sys
+//sys.setrecursionlimit(1000)
+
+递归求阶乘
+写一个求阶乘的函数
+--正整数阶乘指从1乘以2乘以3乘以4一直乘到所要求的数。
+--例如所给的数是5，则阶乘原式是1*2*3*4*5，得到的积是120，所以120就是5的阶乘。
+//非递归版本
+def feidigui(n):
+    result =n
+	for i in range(1,n):
+	    result *= i
+	return  result
+num= feidigui(5)
+print(num)
+>>>120
+//递归版本
+def digui(n):
+    if n==1:
+	   return 1
+	else:
+	   return n *digui(n-1)
+number = int(input('请输入一个数：'))
+result = digui(number)
+print(%d的阶乘是：%d" % (number,result))
+
+
+
+-------------------------23-------------------------
+递归
+斐波那契数列
+
+-------------------------24-------------------------
+递归
+汉诺塔
+
+-------------------------25-------------------------
+字典：当索引不好用时
+字典排序不是按找键的顺序的  而是安照自己排序的方式
+创建和访问字典
+eg：
+brand =['耐克','阿迪','李宁']
+slogan = ['just do it','nothing','让编程改变世界']
+print('耐克的口号是：'slogan[brand.index('耐克')])
+
+dict1={'耐克':'just do it','阿迪':'nothing','李宁':'让编程改变世界'}
+print('耐克的口号是：'dict1['耐克'])
+>>> '耐克的口号是：just do it'
+dict2={}  //创建空字典
+
+dict()
+//使用dict()创建字典 会自动排序，key不用引号
+eg:
+dict3=dict((('a',97),('b',98),('c',99)))
+dict4=dict(耐克='just do it',阿迪='nothing',李宁='让编程改变世界')
+dict4['耐克']='改变字典中存在的keyvalue'
+dict4['爱迪生'] ='添加字典中没有的键值对'
+
+
+-------------------------26-------------------------
+字典：当索引不好用时
+BIF
+fromkeys()   //建立新字典
+keys()    //取键
+values()  //取键值
+items()   //取项
+get()  //如果访问到了不存在的项  不报错但是返回none
+clear()   //清除字典   比赋空字典清除的干净
+copy()   //浅拷贝 开辟新的内存  赋值是同一内存的不同名字
+pop()
+popitem()
+setdefault()
+update()
+id()  //可以查看地址 这样就可以看是不同名字贴到一个值上了 还是开辟新的位置方同样的值
+
+
+-------------------------27-------------------------
+集合：在我的世界里，你就是唯一
+集合不支持索引
+eg：
+num={1,2,3,4,5}  //集合
+num={1,2,3,4,5,5,4,3,2}
+num
+>>>{1,2,3,4,5} 
+num[2] //报错
+
+如何创建一个集合
+一种是直接把一堆元素用花括号括起来
+一种是使用set()工厂函数
+eg:
+set1=set([1,2,3,4,5,5])
+set1
+>>>{1,2,3,4,5}
+
+如何访问集合中的值
+可以使用for把集合中的数据一个个读取出来
+可以通过 in和not in判断一个元素是否在集合中已经存在
+
+add()
+remove()
+
+不可变集合
+frozen:冰冻的，冻结的
+frozenset()
+
+
+-------------------------28-------------------------
+文件
+输入
+处理
+输出
+
+什么是文件
+.exe  .txt  .ppt .jpg .mp4 .avi
+
+打开文件  open()
+打开模式    执行操作
+'r'        以只读方式打开文件（默认）
+'w'        以写入的方式打开文件，会覆盖已存在的文件
+'x'        如果文件已经存在，使用此模式打开将引发异常
+'a'        以写入模式打开，如果文件存在，则在末尾追加写入
+'b'        以二进制模式打开文件
+'t'        以文本模式打开（默认）
+'+'        可读写模式（可添加到其他模式中使用）
+'U'        通用换行符支持
+
+f=open('文件路径/文件名')
+
+文件对象方法
+文件对象方法               执行操作
+f.close()              关闭文件
+f.read(size=-1)        从文件读取size个字符，当未给定size或给定负值的时候，读取剩余的所有字符，然后作为字符串返回
+f.readline()           以写入模式打开，如果文件存在，则在末尾追加写入
+f.write(str)           将字符串str写入文件
+f.writelines(seq)      项文件写入字符串序列seq，seq应该是一个返回字符串的可迭代对象
+f.seek(offset,from)    在文件中移动文件指针，从from（0代表文件起始位置，1代表当前位置，2代表文件末尾）偏移offset个字节
+f.tell()               返回当前在文件中的位置
+
+
+
+-------------------------29-------------------------
+文件的使用例子
+
+
+-------------------------30-------------------------
+OS模块
+有了OS模块，我们不需要关心什么操作系统下使用什么模块，OS模块会帮你选择正确的模块并调用。
+
+import os
+
+os.getcwd()：显示当前的工作路径，只具体到路径，不具体到文件
+os.mkdir(路径名字)：在某个目录下创建一个新目录
+os.rmdir(路径名字)：删除一个目录
+os.listdir()：获取当前路径下的目录列表，返回列表格式数据
+
+os.path模块
+os.path.realpath(path)：返回path的真实路径，如果参数是：__file__就说明三本文件所在的绝对路径
+os.path.join(a,b)：连接两个部分的路径，组成一个完整的路径
+os.path.isdir：判断当前文件是否是目录，返回布尔直
+os.path.isfile：判断当前文件是否是文件，返回布尔值
+
+
+-------------------------31-------------------------
+pickle模块  将数据等以二进制的方式存入取出文件
+
+eg：
+import pickle
+my_list =[123,3.14,'小甲鱼',['suibian']]
+pickle_file = open('my_list.pkl','wb')
+pickle.dump(my_list,pickle_file)
+pickle_file.close()
+pickle_file= open('my_list.pkl','rb')
+my_list2= pickle.load(pickle_file)
+print(my_list2)
+>>>[123,3.14,'小甲鱼',['suibian']]
+
+
+-------------------------32-------------------------
+你不可能总是对的
+Exception
+python标准异常总结
+
+AssertionError	断言语句（assert）失败
+AttributeError	尝试访问未知的对象属性
+EOFError	用户输入文件末尾标志EOF（Ctrl+d）
+FloatingPointError	浮点计算错误
+GeneratorExit	generator.close()方法被调用的时候
+ImportError	导入模块失败的时候
+IndexError	索引超出序列的范围
+KeyError	字典中查找一个不存在的关键字
+KeyboardInterrupt	用户输入中断键（Ctrl+c）
+MemoryError	内存溢出（可通过删除对象释放内存）
+NameError	尝试访问一个不存在的变量
+NotImplementedError	尚未实现的方法
+OSError	操作系统产生的异常（例如打开一个不存在的文件）
+OverflowError	数值运算超出最大限制
+ReferenceError	弱引用（weak reference）试图访问一个已经被垃圾回收机制回收了的对象
+RuntimeError	一般的运行时错误
+StopIteration	迭代器没有更多的值
+SyntaxError	Python的语法错误
+IndentationError	缩进错误
+TabError	Tab和空格混合使用
+SystemError	Python编译器系统错误
+SystemExit	Python编译器进程被关闭
+TypeError	不同类型间的无效操作
+UnboundLocalError	访问一个未初始化的本地变量（NameError的子类）
+UnicodeError	Unicode相关的错误（ValueError的子类）
+UnicodeEncodeError	Unicode编码时的错误（UnicodeError的子类）
+UnicodeDecodeError	Unicode解码时的错误（UnicodeError的子类）
+UnicodeTranslateError	Unicode转换时的错误（UnicodeError的子类）
+ValueError	传入无效的参数
+ZeroDivisionError	除数为零
+
+
+-------------------------33-------------------------
+try-except 语句
+try:
+    检测范围
+except Exception[as reason]:
+    出现异常(Exception)后的处理代码
+eg：
+try:
+    f=open('test.txt')
+    print(f.read())
+    f.close()
+except OSError:
+    print('文件出错了')
+
+try:
+    f=open('test.txt')
+    print(f.read())
+    f.close()
+except OSError as reason:
+    print('文件出错了\n错误的原因是：'+str(reason))
+	
+try:
+    sum = 1+'1'
+    f=open('test.txt')
+    print(f.read())
+    f.close()
+except OSError as reason:
+    print('文件出错了\n错误的原因是：'+str(reason))
+except TypeError as reason:
+    print('类型出错了\n错误的原因是：'+str(reason))
+except:
+    print('出错了')   #只要出错 不管什么类型都执行这个print   不建议 会将所有错误都隐藏 eg Ctrl+c  原本想要强制中断，可是因为这个except就变成不报错 无法强制中断
+	
+
+try:
+    sum = 1+'1'    //第一行错了就不会往下执行了
+    f=open('test.txt')
+    print(f.read())
+    f.close()
+except (OSError,TypeError) :
+    print('出错了')
+
+
+try-finally 语句
+try:
+    检测范围
+except Exception[as reason]:
+    出现异常(Exception)后的处理代码
+finally:
+    无论如何都会被执行的代码   //做一些善后工作，例如关闭文件等
+
+eg：
+try:
+    f=open('test.txt','w')
+    print(f.write('我写入文件'))
+	sum = 1+'1'    
+except (OSError,TypeError) :
+    print('出错了')
+finally：
+    f.close()
+
+raise语句
+自己引出异常
+
+
+-------------------------34-------------------------
+丰富的else语句
+要么怎样，要么不怎样
+干完了能怎样，干不完就别想怎样  eg for  while 与else搭配 
+没有问题，那就干吧
+eg：
+try:
+    int('abc')
+except ValueError :
+    print('出错了')
+else:
+    print('没有错')
+
+简洁的with语句
+eg：
+try:
+    f=open('test.txt','r')
+	for each_line in f:
+	    print(each_line)
+except  OSError as reason:
+    print('出错了：'+str(reason))
+finally:
+    f.close()
+
+try:
+    with open('test.txt','r') as f:    ##with可以自动关注什么时候需要关闭文件，不用自己写close了
+	    for each_line in f:
+	        print(each_line)
+except  OSError as reason:
+    print('出错了：'+str(reason))
+
+		
+
+-------------------------35-------------------------	
+图形用户界面入门：EasyGui
+EasyGui 官网：
+http://easygui.sourceforge.net
+官方的教学文档
+easygui-docs-0.96\tutorial\index.html
+小甲鱼翻译改编的教学文档：
+http://bbs.fishc.com/thread-46069-1-1.html
+安装 EsayGui
+导入 EsayGui
+使用 EasyGui
+建议不要在IDLE上运行EasyGui
+更改 EsayGui参数 改编显示样式
+
+
+-------------------------36-------------------------
+对象=属性+方法
+eg：
+//类
+class Turtle: #类名是用大写字母开头的 
+    #属性
+	color='green'
+	#动作
+    def run(self):
+	    print('小乌龟在跑')
+
+//类的实例化
+tt=Turtle()
+tt.run()
+
+OO的特征
+OO=Object Oriented  面向对象
+封装：信息隐秘技术
+继承：子类自动共享父类之间数据和方法的机制
+多肽：不同对象对同一方法响应不同的行动
+
+
+-------------------------37-------------------------
+self是什么？
+相当于 this
+eg：
+class Ball:
+    def setname(self,name):
+	    self.name=name
+	def kick(self):
+	    print(self.name)
+a=Ball()
+a.setname('球a')
+b=Ball()
+b.setname('球b')
+
+python的魔术方法
+__init__(self)  //构造方法
+eg：
+class Ball:
+    def __init__(self,name):
+	    self.name=name
+	def kick(self):
+	    print(self.name)
+a=Ball('球a')
+a.kick()
+
+公有和私有
+name mangling  名字改编，名字重整
+在Python中定义私有变量只需要在变量名或函数名前加上“__”两个下划线，那么这个函数或变量就会为私有的了。
+eg：
+class Ball:
+    __color='red'
+    def __init__(self,name):
+	    self.name=name
+	def kick(self):
+	    print(self.name)
+a=Ball()
+a.__color  #无法访问
+a._Ball__color   #可以这样访问私有属性   也就意思说python 是伪私有
+
+
+-------------------------38-------------------------
+继承 
+语法：
+class DerivedClassName(BaseClassName):
+BaseClassName:父类、基类或超类
+BaseClassName：子类
+如果子类中定义与父类同名的方法或属性，则会自动覆盖父类对应的方法或属性。
+eg：
+class Parent:
+    def hello(self):
+	    print('你好')
+class Child(Parent):
+    pass     #无意义 占空间
+p=Parent()
+p.hello()
+c=Child()
+c.hello()
+
+调用未绑定的父类方法
+使用super函数
+eg：
+class Parent:
+    def __init__(self):
+	    x=2
+    def hello(self):
+	    print('你好')
+	def num(self):
+	    print(self.x)
+class Child(Parent):
+    def __init__(self):
+	    name='小明'
+chd=Child()
+chd.num()//会报错 因为子类的__init__把父类的覆盖了 就没有x这个值了
+class Parent:
+    def __init__(self):
+	    x=2
+    def hello(self):
+	    print('你好')
+	def num(self):
+	    print(self.x)
+class Child(Parent):
+    def __init__(self):
+	    Parent.__init__(self)    #self指代的是Child
+	    name='小明'
+chd=Child()
+chd.num()   ##不报错 
+
+class Parent:
+    def __init__(self):
+	    x=2
+    def hello(self):
+	    print('你好')
+	def num(self):
+	    print(self.x)
+class Child(Parent):
+    def __init__(self):
+	    super().__init__()    
+	    name='小明'
+
+多重继承   
+容易造成混乱 尽量不要使用
+语法：
+class DerivedClassName(Base1,Base2,Base3)
+eg：
+class Parent1:
+    def hello1(self):
+	    print('你好')
+class Parent2:
+    def hello2(self):
+	    print('你好')
+class Parent3:
+    def hello3(self):
+	    print('你好')
+
+class Child(Parent1,Parent2,Parent3):
+    pass  
+
+
+-------------------------39-------------------------
+组合
+eg：
+class Turtle:
+    def __init__(self,x):
+	    self.num=x
+class Fish:
+    def __init__(self,x):
+	    self.num=x
+class Pool:
+    def __init__(self,x,y):
+	    self.turtle=Turtle(x)
+		self.fish = Fish(y)
+	def print_num(self):
+	    print('水池里总共有乌龟%d只,小鱼%d条' % (self.turtle.num,self.fish.num))
+
+mix_in
+
+类 类对象 实例对象
+eg：
+class C:
+    count =0    //当一个类写完了,它就是一个类对象，Python无处不对象
+a=C()
+b=C()
+c=C()
+a.count    //0
+b.count    //0
+c.count    //0
+c.count +=10
+a.count    //0
+b.count    //0
+c.count    //10
+C.count =100
+a.count    //100
+b.count    //100
+c.count    //10
+如果属性的名字和方法名相同 那么属性会覆盖方法
+不要试图在一个类里边定义出所有能想到的特性和方法，应该利用继承和组合机制来进行扩展。
+用不同的词性命名，如属性名用名词，方法名用动词。
+
+什么是绑定？
+Python严格要求方法需要有实例才能被调用，这种限制其实就是Python所谓的绑定概念。
+
+	
+-------------------------40-------------------------
+BIF
+issubclass()
+isinstance()
+hasattr()
+getattr()
+setattr()
+delattr()
+property()
+
+-------------------------41-------------------------
+魔法方法 
+魔法方法总是被双下划线包围，eg __init__
+魔法方法是面向对象的Python的一切，如果你不知道魔法方法，说明你还没能意识到面向对象Python的强大
+魔法方法的魔力体现在他们总能够在适当的时候被调用
+
+构造和析构
+__init__
+__new__(cls[,...])   //很少去重写
+__del__(self)
+eg：
+class CapStr(str):               //CapStr继承不可改变的类str
+    def __new__(cls,string):
+	    string=string.upper()
+		return str.__new__(cls,string)
+
+class CapStr():               //CapStr继承不可改变的类str
+    def __init__(self):
+	    print('我是init方法 我被调用了')
+	def __del__(self):
+	    print('我是del方法 我被调用了')
+c1=CapStr()
+c2=c1
+c3=c2
+del c3  //没有调用__del__方法
+del c2  //没有调用__del__方法
+del c1  //调用__del__方法了 当所有对象都调用__del__方法 后才会执行del
+ 
+
+
+-------------------------42-------------------------
+工厂函数
+python 无处不对象
+int('123')   //实例一个int对象 传入参数‘123’
+a= int('123')
+b= int('456')
+a+b     //说明对象可以向加减
+python的魔法方法提供了自定义数值处理 可以通过对魔法方法的重写，自定义数字间的算术
+__add__(self, other)
+
+实现了加号运算.
+
+__sub__(self, other)
+
+实现了减号运算.
+
+__mul__(self, other)
+
+实现了乘法运算.
+
+__floordiv__(self, other)
+
+实现了//运算符.
+
+__div__(self, other)
+
+实现了/运算符. 该方法在Python3中废弃. 原因是Python3中，division默认就是true division.
+
+__truediv__(self, other)
+
+实现了true division. 只有你声明了from __future__ import division该方法才会生效.
+
+__mod__(self, other)
+
+实现了%运算符, 取余运算.
+
+__divmod__(self, other)
+
+实现了divmod()內建函数.
+
+__pow__(self, other)
+
+实现了**操作. N次方操作.
+
+__lshift__(self, other)
+
+实现了位操作<<.
+
+__rshift__(self, other)
+
+实现了位操作>>.
+
+__and__(self, other)
+
+实现了位操作&.
+
+__or__(self, other)
+
+实现了位操作|
+
+__xor__(self, other)
+
+实现了位操作^
+
+
+-------------------------43-------------------------
+反运算
+__radd__(self, other)
+__rsub__(self, other)
+__rmul__(self, other)
+__rmul__(self, other)
+__rfloordiv__(self, other)
+__rdiv__(self, other)
+__rtruediv__(self, other)
+__rmod__(self, other)
+__rdivmod__(self, other)
+__rpow__(self, other)
+__rlshift__(self, other)
+__rrshift__(self, other)
+__rand__(self, other)
+__ror__(self, other)
+__rxor__(self, other)
+
+增量赋值
+__iadd__(self, other)
+__isub__(self, other)
+__imul__(self, other)
+__ifloordiv__(self, other)
+__idiv__(self, other)
+__itruediv__(self, other)
+__imod__(self, other)
+__ipow__(self, other)
+__ilshift__(self, other)
+__irshift__(self, other)
+__iand__(self, other)
+__ior__(self, other)
+__ixor__(self, other)
+
+一元运算符和函数
+__pos__(self)
+实现了'+'号一元运算符(比如+some_object)
+__neg__(self)
+实现了'-'号一元运算符(比如-some_object)
+__invert__(self)
+实现了~号(波浪号)一元运算符(比如~some_object)
+__abs__(self)
+实现了abs()內建函数.
+
+
+-------------------------44-------------------------
+简单定制计时器
+time模块的localtime方法获取时间
+
+-------------------------45-------------------------
+属性访问
+.
+getattr()
+属性访问控制
+__getattr__(self, name)
+__getattribute__(self, name)
+__setattr__(self, name, value)
+__delattr__(self, name)
+
+
+-------------------------46-------------------------
+描述符
+__get__
+__set__
+__delete__
+
+eg:
+class A:
+   def __set__(self,instance,owner):
+       print('get')
+	   
+class B:
+    x=A()
+
+
+-------------------------47-------------------------
+协议
+协议与其他编程中的接口很相似，它规定你那些方法必须要定义。在Python中协议更像建议
+
+容器类型的协议
+如果你希望定制的容器是不可变的，你只需要定义__len__()和__getitem__()方法
+如果你希望定制的容器是可变的，需要定义__len__()和__getitem__() __setitem__() __delitem__()方法
+
+
+-------------------------48-------------------------
+迭代器
+iter()
+__iter__()
+next()
+__next__()
+
+
+------------------------49---------------------------
+生成器
+
+
+
+
+
+
+
+
+----------------------------------------------------
+80个Python练手项目列表
+https://www.shiyanlou.com/questions/102676/?utm_source=baidu&utm_medium=cpc&utm_campaign=python&utm_term=keywords&renqun_youhua=417274
+
+
+------------------------------------------------
+问题1：
+>>> a
+['f', 'a', 'v', 'o', 'r', 'i', 't', 'aaa']
+>>> a= a.append('aaa')
+>>> a
+>>> 
+原因是因为a是寄存器  这样不行
+>>> b=5
+>>> b=b+4
+>>> b
+9
+原因是因为b是变量  这样可以 
+>>> a=['f', 'a', 'v', 'o', 'r', 'i', 't']
+>>> b=a.append('aaaa')
+>>> b
+>>> type(b)
+<class 'NoneType'>
+>>> a=['f', 'a', 'v', 'o', 'r', 'i', 't']
+>>> a.append('aaaa')
+>>> a
+['f', 'a', 'v', 'o', 'r', 'i', 't', 'aaaa']
+具体可以等杨鹏的笔记看一下
+
+
+问题2：
+int('3.3')
+原因：
+https://www.runoob.com/python/python-func-int.html
+
+
+python中 列表 元组 字典 集合
+列表
+list1 = ['Google', 'Runoob', 1997, 2000];
+创建空列表  
+list1= list()
+list2=[]
+特点
+可重复，类型可不同。类型不同也是跟数组最本质的区别了
+
+元组
+tup1 = ('Google', 'Runoob', 1997, 2000)
+创建空元组  
+tup1 = ()
+tup2 = tuple()
+特点
+元组是只读的，不能修改
+
+
+字典
+d = {key1 : value1, key2 : value2 }
+创建空字典
+dic1={}
+dic2=dict()
+特点
+字典最大的价值是查询，通过键，查找值。
+
+集合
+parame = {value01,value02,...}
+创建空集合 parame = set()
+特点
+集合最好的应用是去重
+
+
+
+
+
