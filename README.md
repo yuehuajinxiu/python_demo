@@ -1,4 +1,22 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.lanqiao.cn/questions/102676/
+
 ### python高级特性
+
+
 
 ##### 切片
 
@@ -172,4 +190,106 @@ True
 ```
 
 ### 函数式编程
+
+函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数！
+
+Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。
+
+##### 变量可以指向函数
+
+```python
+>>> abs(-10)
+10
+>>> f=abs
+>>> f(-10)
+10
+```
+
+##### 传入函数
+
+既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为<span style="color:red">高阶函数</span>。
+
+```python
+def add(x, y, f):
+    return f(x) + f(y)
+print(add(-5, 6, abs))
+11
+```
+
+Python内建的高阶函数：
+
+##### map()
+
+`map()`函数接收两个参数，一个是函数，一个是`Iterable`，`map`将传入的函数依次作用到序列的每个元素，并把结果作为新的`Iterator`返回。Iterator是一个惰性序列，所以要强迫`map()`完成计算结果，需要用`list()`函数获得所有结果并返回list。
+
+```python
+>>> def f(x):
+...     return x*x
+...
+>>> r = map(f,[1,3,5,6])
+>>> r
+<map object at 0x000001A8DAB5EFD0>
+>>> list(r)
+[1, 9, 25, 36]
+```
+
+
+
+##### reduce()
+
+`reduce`把一个函数作用在一个序列`[x1, x2, x3, ...]`上，这个函数必须接收两个参数，`reduce`把结果继续和序列的下一个元素做累积计算，其效果就是：
+
+```
+reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+```
+
+```python
+>>> from functools import reduce
+>>> def fn(x, y):
+...     return x*10+y
+...
+>>> reduce(fn,[1,3,4,6])
+1346
+```
+
+
+
+##### filter()
+
+`filter()`把传入的函数依次作用于每个元素，然后根据返回值是`True`还是`False`决定保留还是丢弃该元素。
+
+```python
+>>> def not_empty(s):
+...     return s and s.strip()
+...
+>>> f = filter( not_empty,['a','','b',' ',None])
+>>> list(f)
+['a', 'b']
+```
+
+****埃拉算法练习****
+
+```python
+
+```
+
+
+
+##### sorted()
+
+```python
+#对list排序
+>>> sorted([36, 5, -12, 9, -21])
+[-21, -12, 5, 9, 36]
+#还可以接收一个key函数来实现自定义的排序
+#这里是按照绝对值大小排序
+>>> sorted([36, 5, -12, 9, -21],key=abs)
+[5, 9, -12, -21, 36]
+#倒序
+>>> sorted([36, 5, -12, 9, -21],key=abs,reverse=True)
+[36, -21, -12, 9, 5]
+#再看个例子，把字符串转成小写后再排序即（不区分大小写排序）
+>>> sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower)
+['about', 'bob', 'Credit', 'Zoo']
+```
 
