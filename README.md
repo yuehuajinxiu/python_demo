@@ -285,7 +285,7 @@ reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
 #这里是按照绝对值大小排序
 >>> sorted([36, 5, -12, 9, -21],key=abs)
 [5, 9, -12, -21, 36]
-#倒序
+#排序的结果，再倒序
 >>> sorted([36, 5, -12, 9, -21],key=abs,reverse=True)
 [36, -21, -12, 9, 5]
 #再看个例子，把字符串转成小写后再排序即（不区分大小写排序）
@@ -293,3 +293,105 @@ reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
 ['about', 'bob', 'Credit', 'Zoo']
 ```
 
+练习
+
+```python
+>>> L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+>>> def by_score(t):
+...     return t[1]
+...
+>>> def by_name(t):
+...     return t[0]
+...
+#按成绩从高到低排序
+>>> L2 = sorted(L,key=by_score,reverse=True)
+>>> print(L2)
+[('Adam', 92), ('Lisa', 88), ('Bob', 75), ('Bart', 66)]
+#按姓名排序
+>>> L3 =  sorted(L,key=by_name)
+>>> L3
+[('Adam', 92), ('Bart', 66), ('Bob', 75), ('Lisa', 88)]
+```
+
+##### 返回函数
+
+函数不只可以作为参数，还可以作为另一个函数的返回值。
+
+```python
+#定义一个求和函数
+def lazy_sum(*args):
+    def sum():
+        ax = 0
+        for n in args:
+            ax = ax + n
+        return ax
+    return sum
+>>>f = lazy_sum(1, 3, 5, 7, 9)
+#当调用f()时，才是真正的计算求和
+>>> f()
+25
+
+```
+
+内部函数`sum`可以引用外部函数`lazy_sum`的参数和局部变量，当`lazy_sum`返回函数`sum`时，相关参数和变量都保存在返回的函数中，这种称为“<span style="color:red">闭包</span>（Closure）”的程序结构拥有极大的威力。
+
+##### 装饰器decorator
+
+```python
+>>> def now():
+...     print('2021-1-18')
+...
+#__name__属性，可以拿到函数的名字
+>>> now.__name__
+'now'
+
+```
+
+在函数调用前后自动打印日志，但又不希望修改`now()`函数的定义，这种在代码运行期间动态增加功能的方式，称之为<span style='color:red'>“装饰器”（Decorator）</span>。
+
+本质上，decorator就是一个返回函数的高阶函数。
+
+```python
+def log(func):
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+#我们要借助Python的@语法，把decorator置于函数的定义处：
+@log
+def now():
+    print('2015-3-25')
+    
+#调用now()函数，不仅会运行now()函数本身，还会在运行now()函数前打印一行日志：
+>>> now()
+call now():
+2015-3-25
+```
+
+##### 偏函数
+
+Python的`functools`模块提供了很多有用的功能，其中一个就是偏函数（Partial function）。
+
+当函数的参数个数太多，需要简化时，使用`functools.partial`可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。
+
+```python
+#字符串转整数函数
+#默认是10进制
+>>> int('123')
+123
+>>> int('123',8)
+83
+>>> int('123',16)
+291
+#如果想转二级制，就要每次调用
+>>> int('100',2)
+4
+#闲麻烦得话，就定义一个转二进制字符串的int2()方法
+#这时不需要自己定义，python提供了偏函数，
+>>> import functools
+>>> int2 = functools.partial(int, base=2)
+>>> int2('1000')
+8
+```
+
+#### 模块
