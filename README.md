@@ -1,17 +1,5 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 https://www.lanqiao.cn/questions/102676/
 
 ### python高级特性
@@ -395,3 +383,57 @@ Python的`functools`模块提供了很多有用的功能，其中一个就是偏
 ```
 
 #### 模块
+
+大大提高了代码的可维护性。
+
+python里一个py文件就是一个模块。
+
+按目录来组织模块的方法，称为包（Package）。
+
+```ascii
+#例如mycompany目录，每一个包目录下面必须有一个__init__.py的文件，不然就被当成普通目录，而不是包了。
+#__init__.py可以是空文件，也可以有Python代码
+mycompany
+├─ __init__.py
+├─ abc.py
+└─ xyz.py
+```
+
+Python模块的标准文件模板：
+
+​	第一行，在Linux/Mac下运行
+
+​	第二行，编码设定
+
+​	第四行，文档注释
+
+​	第六行，标记作者
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+' a test module '
+
+__author__ = 'Michael Liao'
+```
+
+使用模块：python自带的sys模块 
+
+```python
+ import sys
+```
+
+##### 作用域
+
+正常的函数和变量名是公开的（public），可以被直接引用，比如：`abc`，`x123`，`PI`等；
+
+类似`__xxx__`这样的变量是特殊变量，可以被直接引用，比如`__author__，__name__`
+
+类似`_xxx`和`__xxx`这样的函数或变量就是<span style="color:red">非公开</span>的（private），不应该被直接引用，不是说不能被引用。python里没有像Java里可以把变量或者函数设置为private属性，就用这样__开头的变量代替。
+
+第三方模块
+
+在Python中，安装第三方模块，是通过包管理工具pip完成的。
+
+用pip一个个安装有点麻烦，而且还要考虑兼容性，推荐Anaconda，这是一个基于Python的数据处理和科学计算平台。可以从[Anaconda官网](https://www.anaconda.com/download/)下载GUI安装包，安装包有500~600M，所以需要耐心等待下载。下载后直接安装，Anaconda会把系统Path中的python指向自己自带的Python，并且，Anaconda安装的第三方模块会安装在Anaconda自己的路径下，不影响系统已安装的Python目录。
