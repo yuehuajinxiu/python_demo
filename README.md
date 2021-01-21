@@ -432,8 +432,172 @@ __author__ = 'Michael Liao'
 
 类似`_xxx`和`__xxx`这样的函数或变量就是<span style="color:red">非公开</span>的（private），不应该被直接引用，不是说不能被引用。python里没有像Java里可以把变量或者函数设置为private属性，就用这样__开头的变量代替。
 
-第三方模块
+##### 第三方模块
 
-在Python中，安装第三方模块，是通过包管理工具pip完成的。
+在Python中，安装第三方模块，是通过包管理工具<span style="color:red">pip</span>完成的。
 
-用pip一个个安装有点麻烦，而且还要考虑兼容性，推荐Anaconda，这是一个基于Python的数据处理和科学计算平台。可以从[Anaconda官网](https://www.anaconda.com/download/)下载GUI安装包，安装包有500~600M，所以需要耐心等待下载。下载后直接安装，Anaconda会把系统Path中的python指向自己自带的Python，并且，Anaconda安装的第三方模块会安装在Anaconda自己的路径下，不影响系统已安装的Python目录。
+用pip一个个安装有点麻烦，而且还要考虑兼容性，推荐Anaconda，这是一个基于Python的数据处理和科学计算平台。可以从<a href="https://www.anaconda.com/products/individual">Anaconda官网</a>下载GUI安装包，安装包有500~600M，所以需要耐心等待下载。下载后直接安装，Anaconda会把系统Path中的python指向自己自带的Python，并且，Anaconda安装的第三方模块会安装在Anaconda自己的路径下，不影响系统已安装的Python目录。
+
+python的IDE : Anaconda ,<a href="https://www.jetbrains.com/pycharm/">Pycharm</a>
+
+#### 面向对象编程
+
+##### 类和实例
+
+```python
+#class 关键字，Student类名 (object)表示该类是从哪个类继承下来的
+class Student(object):
+    def __init__(self, name, score):
+        #属性名称前加`__`，就变成了一个私有变量（private），只有内部可以访问，外部不能访问
+        self.__name = name
+        self.__score = score
+```
+
+`__init__`相当于构造函数
+
+```python
+from Student import *
+str = Student(‘Lily’,15)
+print(str)
+<Student.Student object at 0x0000021DA25F86D0>
+```
+
+
+
+##### 获取对象信息
+
+type()获取对象类型
+
+isinstance()判断class的类型
+
+dir()获得一个对象的所有属性和方法
+
+##### 实例属性和类属性
+
+python是动态语言，类实例创建后，可以绑定任意的属性和方法。
+
+```python
+#比如这个类，里面什么都没有定义
+class Student(object):
+    pass
+#给实例绑定一个属性
+s = Student()
+s.name = 'Lucy'
+print(s.name)
+Lucy
+#给实例绑定一个方法
+def set_age(self, age):
+    self.age = age
+from types import MethodType
+s.set_age = MethodType(set_age, s)
+s.set_age(12)
+print(s.age)
+12
+#注意：给一个实例绑定的方法，对另一个实例是不起作用的：
+#可以给class绑定方法，这样所有的实例都可以用
+
+Student.set_age = set_age
+s.set_age(20)
+s2 = Student()
+s2.set_age(22)
+print(s.age)
+print(s2.age)
+20
+22
+
+```
+
+但是可以通过一个特殊的`__slots__`变量限制添加实例的属性。
+
+```python
+#__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的
+class Student(object):
+    #name,age以外的属性不能添加，否则报错
+    __slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
+
+s = Student()
+s.name = "Lucy"
+print(s.name)
+s.score=23
+print(s.score)
+Lucy
+Traceback (most recent call last):
+  File "C:/Users/dell/PycharmProjects/pythonProject/main.py", line 20, in <module>
+    s.score=23
+AttributeError: 'Student' object has no attribute 'score'    
+```
+
+##### `@property`
+
+python内置装饰器
+
+```python
+class Student(object):
+#相当于一个get方法
+    @property
+    def score(self):
+        return self._score
+    #property又创建了score.setter装饰器，这个相当于set方法
+    @score.setter装饰器，这个相当于set方法
+    def score(self, value):
+        if not isinstance(value, int):
+            raise ValueError('score must be an integer!')
+        if value < 0 or value > 100:
+            raise ValueError('score must between 0 ~ 100!')
+        self._score = value
+#利用装饰器，相当于写了get set方法，对属性做了检验        
+s.score = 9999
+Traceback (most recent call last):
+  ...
+ValueError: score must between 0 ~ 100!
+```
+
+##### 多重继承
+
+python允许多重继承
+
+```python
+class Dog(Mammal, Runnable):
+    pass
+```
+
+##### 定制类
+
+https://docs.python.org/3/reference/datamodel.html#special-method-names
+
+`__str__`
+
+```python
+#原本类是这样的
+class Student(object):
+
+    def __init__(self,name):
+        self.name = name
+s = Student("meimei")
+print(s)
+<Student.Student object at 0x000001D31A8386D0>
+#在类里定义了__str__()方法后，打印类实例后
+class Student(object):
+
+    def __init__(self,name):
+        self.name = name
+
+    def __str__(self):
+        return 'Student object (name: %s)' % self.name
+s = Student("meimei")
+print(s)
+Student object (name: meimei)
+```
+
+`__iter__()`
+
+一个类想被用于`for ... in`循环，类似list或tuple那样，就必须实现一个`__iter__()`方法，该方法返回一个迭代对象。
+
+`__getitem__`
+
+`__getattr__` 调用类的方法或属性时，如果不存在，就会报错。利用这个方法，做判断。
+
+`__call__`可以直接对实例进行调用。
+
+##### 枚举类
+
