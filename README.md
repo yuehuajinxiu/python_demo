@@ -601,3 +601,150 @@ Student object (name: meimei)
 
 ##### 枚举类
 
+为枚举类型定义一个class类型，然后，每个常量都是class的一个唯一实例。
+
+```python
+from enum import Enum
+
+Months = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
+for name,member in Months.__members__.items():
+    print(name, '=>', member, ',', member.value)
+Jan => Month.Jan , 1
+Feb => Month.Feb , 2
+Mar => Month.Mar , 3
+Apr => Month.Apr , 4
+May => Month.May , 5
+Jun => Month.Jun , 6
+Jul => Month.Jul , 7
+Aug => Month.Aug , 8
+Sep => Month.Sep , 9
+Oct => Month.Oct , 10
+Nov => Month.Nov , 11
+Dec => Month.Dec , 12
+```
+
+`value`属性则是自动赋给成员的`int`常量，默认从`1`开始计数。
+
+可以从`Enum`派生出自定义类：
+
+```python
+from enum import Enum,unique
+@unique
+class Weekday(Enum):
+    Sun = 0 # Sun的value被设定为0
+    Mon = 1
+    Tue = 2
+    Wed = 3
+    Thu = 4
+    Fri = 5
+    Sat = 6
+
+print(Weekday.Wed)
+print(Weekday['Wed'])
+
+print(Weekday.Wed.value)
+print(Weekday(3))
+print(Weekday(7))
+Weekday.Wed
+Weekday.Wed
+3
+Weekday.Wed
+```
+
+#### IO编程
+
+文件读写
+
+文件读写权限：
+
+| r    | 只读模式                           |
+| ---- | ---------------------------------- |
+| w    | 写入文件，如果文件不存在会自动创建 |
+| rb   | 以二进制文件打开文件只读。         |
+| wb   | 以二进制文件打开文件可写。         |
+| a    | 在文件末尾追加。                   |
+
+
+
+```python
+f = open("test.txt","w")  #在当前目录创建一个文件
+f.write("hello world")
+f.close()
+```
+
+```python
+#读取文件
+f = open("test.txt","r")
+content = f.read(5)
+print(content)
+#read方法，指针移动
+content = f.read(3)
+print(content)
+f.close()
+#打印结果
+hello
+ wo
+```
+
+```python
+#若文件里有多行内容
+#hello world
+#hello 123
+#如何读取文件所有的内容
+f = open("test.txt","r")
+content = f.readlines()
+print(content)
+f.close()
+#结果  文件读取时，按每一行读取，放到字典里
+['hello world\n', 'hello 123']
+#还有f.readline()每次只读一行
+```
+
+
+
+```python
+import os
+
+os.rename
+os下有很多对文件的处理方法，自学去
+```
+
+#### 异常处理
+
+```python
+try:
+    pass
+except Exception as e:
+    print('except:', e)
+finally:
+    
+```
+
+#### 爬虫
+
+参考资料：https://www.bilibili.com/video/BV12E411A7ZQ?p=20
+
+```python
+#-*- coding = utf-8 -*-
+from bs4 import BeautifulSoup
+import urllib.request
+import xlwt
+import re
+
+
+
+def getData(url):
+    header = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"}
+    req = urllib.request.Request(url,headers=header)
+    response = urllib.request.urlopen(req)
+    data = response.read().decode('utf-8')
+    return data
+
+
+
+if __name__ == "__main__" :
+    url = "https://movie.douban.com/top250"
+    data = getData(url)
+    print(data)
+```
+
