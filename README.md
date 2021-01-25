@@ -777,11 +777,21 @@ for item in soup.find_all('div',class_="item"):
 # 4. 保存数据到excel里
 # python里xlwt讲数据保存到excel里
 
-workbook = xlwt.Workbook(encoding='utf-8')
+workbook = xlwt.Workbook(encoding="utf-8")
 worksheet = workbook.add_sheet('douban')
-worksheet.write(0,0,'hello')
-worksheet.save("test.xls")
+col = ["电影名称","电影网站","评分","访问人数"]
+for i in range(0,len(col)):
+    worksheet.write(0,i,col[i])
 
+
+for i in range(0,len(dataList)):
+    data = dataList[i]
+    for j in range(0,len(col)):
+        worksheet.write(i+1,j,data[j])
+
+workbook.save("test.xls")
+
+# worksheet.write(0,0,'hello')  #第一个参数是行，第二个参数是列，第三个参数是内容
 
 ```
 
