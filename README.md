@@ -651,6 +651,16 @@ Weekday.Wed
 Weekday.Wed
 ```
 
+##### 元类
+
+
+
+
+
+
+
+
+
 #### IO编程
 
 文件读写
@@ -725,26 +735,53 @@ finally:
 参考资料：https://www.bilibili.com/video/BV12E411A7ZQ?p=20
 
 ```python
-#-*- coding = utf-8 -*-
+# -*- coding: utf-8 -*-
+#1. 环境准备，各种需要的包安装
 from bs4 import BeautifulSoup
 import urllib.request
 import xlwt
 import re
 
+#2. 数据获取
+target_url = "https://movie.douban.com/top250"
+#防爬虫设置
+header = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"}
+req = urllib.request.Request(target_url,headers=header)
+response = urllib.request.urlopen(req)
+data = response.read().decode('utf-8')
+
+# f = open("douban.html","w",encoding='utf-8')
+# f.write(data)
+
+# 3.数据解析
+
+soup = BeautifulSoup(data,"html.parser")
+dataList = []
+for item in soup.find_all('div',class_="item"):
+    itemlist = []
+    #通过BeautifulSoup获取各节点的值
+    title = item.find(class_="title").text
+    link = item.a['href']
+    rate = item.find(class_='rating_num').text
+    #利用正则
+    findJudge = re.compile(r'<span>(\d*)人评价</span>')
+    num = re.findall(findJudge,str(item))  #用正则的话，第二个参数必须是字符串，用str()转一下
+    itemlist.append(title)
+    itemlist.append(link)
+    itemlist.append(rate)
+    itemlist.append(num[0])
+    #最后把所有值放到list里
+    dataList.append(itemlist)
+
+# print(dataList)
+# 4. 保存数据到excel里
+# python里xlwt讲数据保存到excel里
+
+workbook = xlwt.Workbook(encoding='utf-8')
+worksheet = workbook.add_sheet('douban')
+worksheet.write(0,0,'hello')
+worksheet.save("test.xls")
 
 
-def getData(url):
-    header = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"}
-    req = urllib.request.Request(url,headers=header)
-    response = urllib.request.urlopen(req)
-    data = response.read().decode('utf-8')
-    return data
-
-
-
-if __name__ == "__main__" :
-    url = "https://movie.douban.com/top250"
-    data = getData(url)
-    print(data)
 ```
 
